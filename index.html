@@ -1,1 +1,744 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080b1a">
+<title>SHABAKATY PLUS PRO</title>
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070817;
+  --panel:#0d1125;
+  --panel2:#121832;
+  --text:#fff;
+  --muted:#9ca8c7;
+  --purple:#8b5cf6;
+  --cyan:#22d3ee;
+  --blue:#3b82f6;
+  --green:#22c55e;
+  --orange:#f59e0b;
+  --pink:#ec4899;
+  --red:#ef4444;
+}
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(139,92,246,.22),transparent 30%),
+    radial-gradient(circle at 90% 15%,rgba(34,211,238,.16),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(236,72,153,.10),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0}
+.container{width:min(1200px,94%);margin:auto}
+
+header{
+  padding:22px 0 10px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(7,8,23,.78);
+}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo{
+  width:55px;height:55px;border-radius:17px;
+  display:grid;place-items:center;
+  font-size:28px;font-weight:bold;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  box-shadow:0 0 30px rgba(139,92,246,.35);
+}
+.brand h1{font-size:21px}
+.brand p{font-size:12px;color:var(--muted);margin-top:4px}
+
+.status{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(34,197,94,.08);
+  border:1px solid rgba(34,197,94,.25);
+  padding:9px 13px;border-radius:30px;
+  color:#86efac;font-size:12px;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+}
+
+.hero{
+  padding:35px 0 25px;
+}
+.hero h2{
+  font-size:clamp(28px,5vw,48px);
+  line-height:1.15;
+  background:linear-gradient(90deg,#fff,#b8a4ff,#66e7f5);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  margin-top:12px;
+  color:var(--muted);
+  max-width:700px;
+  line-height:1.8;
+}
+
+.actions{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+}
+.btn{
+  padding:12px 17px;border-radius:13px;
+  color:white;background:#171d3a;
+  border:1px solid #283153;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-2px);border-color:#53618f}
+.btn.primary{
+  background:linear-gradient(135deg,var(--purple),#6d28d9);
+  border-color:transparent;
+  box-shadow:0 8px 25px rgba(139,92,246,.22);
+}
+.btn.cyan{
+  background:linear-gradient(135deg,#0891b2,var(--cyan));
+  color:#04131a;border:0;
+}
+.btn.green{
+  background:linear-gradient(135deg,#16a34a,var(--green));
+  color:#04130a;border:0;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin:15px 0 25px;
+}
+.stat{
+  background:linear-gradient(145deg,rgba(18,24,50,.95),rgba(11,15,34,.95));
+  border:1px solid #222b4b;
+  border-radius:20px;
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+}
+.stat:after{
+  content:"";
+  position:absolute;
+  width:90px;height:90px;border-radius:50%;
+  background:var(--accent,#8b5cf6);
+  filter:blur(45px);
+  opacity:.16;left:-25px;bottom:-35px;
+}
+.stat .icon{font-size:25px}
+.stat .num{font-size:27px;font-weight:bold;margin-top:8px}
+.stat .label{font-size:12px;color:var(--muted);margin-top:5px}
+
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:30px 0 15px;
+}
+.section-title h3{font-size:19px}
+.section-title span{color:var(--muted);font-size:12px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:23px;
+  min-height:175px;
+  padding:22px;
+  background:
+    linear-gradient(145deg,rgba(20,27,56,.96),rgba(9,13,30,.98));
+  border:1px solid #263153;
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#56648e;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+.card:before{
+  content:"";
+  position:absolute;
+  width:150px;height:150px;
+  border-radius:50%;
+  background:var(--glow,#8b5cf6);
+  filter:blur(60px);
+  opacity:.18;
+  left:-45px;top:-45px;
+}
+.card .bigicon{
+  font-size:38px;
+  position:relative;
+}
+.card h4{
+  font-size:18px;margin-top:12px;
+  position:relative;
+}
+.card p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin-top:7px;
+  position:relative;
+}
+.card .go{
+  position:absolute;
+  left:18px;bottom:17px;
+  color:#c8d1ef;font-size:12px;
+}
+
+.purple{--glow:#8b5cf6}
+.cyan{--glow:#22d3ee}
+.blue{--glow:#3b82f6}
+.green{--glow:#22c55e}
+.orange{--glow:#f59e0b}
+.pink{--glow:#ec4899}
+.red{--glow:#ef4444}
+
+.panel{
+  margin-top:15px;
+  padding:20px;
+  border-radius:22px;
+  background:rgba(13,17,37,.92);
+  border:1px solid #242e50;
+}
+.panel h3{font-size:17px;margin-bottom:15px}
+.form{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.field label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.field input,.field select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #293455;
+  background:#090d20;
+  color:white;
+  outline:none;
+}
+.field input:focus,.field select:focus{border-color:var(--purple)}
+.full{grid-column:1/-1}
+
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{
+  padding:13px 10px;
+  border-bottom:1px solid #202945;
+  text-align:right;
+  font-size:12px;
+}
+th{color:#bfc9e6}
+td{color:#dce3f7}
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+}
+.badge.ok{background:rgba(34,197,94,.12);color:#86efac}
+.badge.warn{background:rgba(245,158,11,.12);color:#fcd34d}
+.badge.off{background:rgba(239,68,68,.12);color:#fca5a5}
+
+.notice{
+  margin-top:15px;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(34,211,238,.06);
+  border:1px solid rgba(34,211,238,.18);
+  color:#b8f4ff;
+  font-size:12px;
+  line-height:1.8;
+}
+
+footer{
+  padding:35px 0;
+  text-align:center;
+  color:#697493;
+  font-size:11px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  overflow:auto;
+}
+.modal.show{display:flex;align-items:center;justify-content:center}
+.modal-box{
+  width:min(650px,100%);
+  background:#0d1125;
+  border:1px solid #303b61;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.55);
+}
+.modal-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;
+}
+.close{
+  width:35px;height:35px;border-radius:10px;
+  background:#1a2140;color:white;
+}
+
+.toast{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  z-index:200;
+  background:#151c38;
+  border:1px solid #334067;
+  color:white;
+  padding:13px 17px;
+  border-radius:14px;
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+@media(max-width:800px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .form{grid-template-columns:1fr}
+  .full{grid-column:auto}
+}
+@media(max-width:480px){
+  .container{width:92%}
+  .stats{gap:9px}
+  .stat{padding:14px}
+  .stat .num{font-size:22px}
+  .hero{padding-top:25px}
+  .status{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container top">
+  <div class="brand">
+    <div class="logo">ش</div>
+    <div>
+      <h1>SHABAKATY PLUS PRO</h1>
+      <p>منصة إدارة الشبكات والبطاقات الذكية</p>
+    </div>
+  </div>
+  <div class="status"><span class="dot"></span> النظام يعمل</div>
+</div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <h2>شبكتك، أرباحك، بين يديك.</h2>
+  <p>
+    لوحة تحكم احترافية لإدارة الروترات، نقاط الوصول، البطاقات،
+    العملاء، الوكلاء، المبيعات، المصروفات والتقارير من مكان واحد.
+  </p>
+
+  <div class="actions">
+    <button class="btn primary" onclick="openModal('routerModal')">＋ إضافة روتر</button>
+    <button class="btn cyan" onclick="showToast('تم فتح مركز البطاقات')">🎫 مركز البطاقات</button>
+    <button class="btn" onclick="showToast('جاري تجهيز التحليل الذكي')">✨ تحليل شبكتك</button>
+    <button class="btn green" onclick="showToast('تم فتح التقارير')">📊 التقارير</button>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat" style="--accent:#8b5cf6">
+    <div class="icon">🌐</div>
+    <div class="num">3</div>
+    <div class="label">الروترات</div>
+  </div>
+  <div class="stat" style="--accent:#22d3ee">
+    <div class="icon">📡</div>
+    <div class="num">12</div>
+    <div class="label">نقاط الوصول</div>
+  </div>
+  <div class="stat" style="--accent:#22c55e">
+    <div class="icon">🎫</div>
+    <div class="num">1,248</div>
+    <div class="label">بطاقات متاحة</div>
+  </div>
+  <div class="stat" style="--accent:#f59e0b">
+    <div class="icon">💰</div>
+    <div class="num">18%</div>
+    <div class="label">نمو المبيعات</div>
+  </div>
+</section>
+
+<div class="section-title">
+  <h3>لوحة التحكم</h3>
+  <span>كل أدوات شبكتك في مكان واحد</span>
+</div>
+
+<section class="grid">
+
+  <div class="card purple" onclick="openModal('routerModal')">
+    <div class="bigicon">🌐</div>
+    <h4>إدارة الروترات</h4>
+    <p>إضافة وإدارة الروترات ومتابعة الاتصال وحالة الشبكة.</p>
+    <span class="go">فتح الإدارة ←</span>
+  </div>
+
+  <div class="card cyan" onclick="showToast('قسم نقاط الوصول جاهز')">
+    <div class="bigicon">📡</div>
+    <h4>نقاط الوصول</h4>
+    <p>إدارة AP والعملاء المتصلين ومراقبة حالة الاتصال.</p>
+    <span class="go">فتح الإدارة ←</span>
+  </div>
+
+  <div class="card blue" onclick="showToast('تم فتح برمجة الشبكة')">
+    <div class="bigicon">⚙️</div>
+    <h4>برمجة الشبكة</h4>
+    <p>إعدادات الشبكة والواجهات والملفات الشخصية والسرعات.</p>
+    <span class="go">فتح الإدارة ←</span>
+  </div>
+
+  <div class="card green" onclick="showToast('تم فتح مركز البطاقات')">
+    <div class="bigicon">🎫</div>
+    <h4>إنشاء الكروت</h4>
+    <p>إنشاء كميات كبيرة من البطاقات مع السعر والسرعة والمدة.</p>
+    <span class="go">فتح المركز ←</span>
+  </div>
+
+  <div class="card orange" onclick="showToast('تم فتح استوديو الطباعة')">
+    <div class="bigicon">🖨️</div>
+    <h4>استوديو طباعة الكروت</h4>
+    <p>تصميم وطباعة البطاقات بمقاسات وألوان احترافية.</p>
+    <span class="go">فتح الطباعة ←</span>
+  </div>
+
+  <div class="card pink" onclick="showToast('تم فتح المخزون')">
+    <div class="bigicon">📦</div>
+    <h4>المخزون والتحويلات</h4>
+    <p>متابعة المتاح والمباع والمحجوز وتحويل الكروت للوكلاء.</p>
+    <span class="go">فتح المخزون ←</span>
+  </div>
+
+  <div class="card cyan" onclick="showToast('تم فتح البحث الذكي')">
+    <div class="bigicon">🔎</div>
+    <h4>البحث الذكي عن الكرت</h4>
+    <p>ابحث عن الكرت واعرض حالته وبيانات العميل والاستخدام.</p>
+    <span class="go">بحث الآن ←</span>
+  </div>
+
+  <div class="card purple" onclick="showToast('تم فتح العملاء')">
+    <div class="bigicon">👥</div>
+    <h4>العملاء</h4>
+    <p>إدارة العملاء وأرقامهم وباقاتهم وتواريخ الانتهاء.</p>
+    <span class="go">فتح العملاء ←</span>
+  </div>
+
+  <div class="card blue" onclick="showToast('تم فتح المنازل والاشتراكات')">
+    <div class="bigicon">🏠</div>
+    <h4>إدارة المنازل والاشتراكات</h4>
+    <p>إدارة اشتراكات المنازل والباقات والمدفوعات والتنبيهات.</p>
+    <span class="go">فتح الإدارة ←</span>
+  </div>
+
+  <div class="card orange" onclick="showToast('تم فتح الوكلاء والبقالات')">
+    <div class="bigicon">🏪</div>
+    <h4>الوكلاء والبقالات</h4>
+    <p>مخزون كل وكيل ومبيعاته وطلبات الكروت والمراسلة.</p>
+    <span class="go">فتح الوكلاء ←</span>
+  </div>
+
+  <div class="card green" onclick="showToast('تم فتح الشراء المباشر')">
+    <div class="bigicon">🛒</div>
+    <h4>الشراء المباشر</h4>
+    <p>طلب كرت واختيار الباقة وتسجيل عملية الشراء.</p>
+    <span class="go">فتح الشراء ←</span>
+  </div>
+
+  <div class="card pink" onclick="showToast('تم فتح المالية والأرباح')">
+    <div class="bigicon">💵</div>
+    <h4>المالية والأرباح</h4>
+    <p>المبيعات والمصروفات والعمولات وصافي الأرباح.</p>
+    <span class="go">فتح المالية ←</span>
+  </div>
+
+  <div class="card purple" onclick="showToast('تم فتح التقارير الذكية')">
+    <div class="bigicon">📊</div>
+    <h4>التقارير الذكية</h4>
+    <p>تقارير يومية وأسبوعية وشهرية وسنوية مع مؤشرات واضحة.</p>
+    <span class="go">فتح التقارير ←</span>
+  </div>
+
+  <div class="card cyan" onclick="showToast('تحليل الشبكة يحتاج بيانات حقيقية')">
+    <div class="bigicon">✨</div>
+    <h4>تحليل شبكتك بالذكاء</h4>
+    <p>تحليل المبيعات والأداء والتنبيهات والفرص باستخدام بيانات الشبكة.</p>
+    <span class="go">ابدأ التحليل ←</span>
+  </div>
+
+  <div class="card red" onclick="showToast('تم فتح Network Guard')">
+    <div class="bigicon">🛡️</div>
+    <h4>Network Guard</h4>
+    <p>مراقبة الانقطاع والضغط والأخطاء والتنبيهات الأمنية.</p>
+    <span class="go">فتح الحماية ←</span>
+  </div>
+
+  <div class="card blue" onclick="showToast('تم فتح الأتمتة')">
+    <div class="bigicon">🤖</div>
+    <h4>الأتمتة والتنبيهات</h4>
+    <p>تنبيهات تلقائية وتقارير دورية ومتابعة الأحداث المهمة.</p>
+    <span class="go">فتح الأتمتة ←</span>
+  </div>
+
+  <div class="card orange" onclick="showToast('تم فتح المراسلة')">
+    <div class="bigicon">💬</div>
+    <h4>مراسلة الوكلاء</h4>
+    <p>تواصل مباشر بين صاحب الشبكة والوكلاء والبقالات.</p>
+    <span class="go">فتح الرسائل ←</span>
+  </div>
+
+  <div class="card green" onclick="showToast('تم فتح طلبات الكروت')">
+    <div class="bigicon">📨</div>
+    <h4>طلبات الكروت</h4>
+    <p>استقبال طلبات الوكلاء وتحديد الكمية وتنفيذ التحويل.</p>
+    <span class="go">فتح الطلبات ←</span>
+  </div>
+
+  <div class="card purple" onclick="showToast('تم فتح الموظفين والصلاحيات')">
+    <div class="bigicon">👨‍💼</div>
+    <h4>الموظفون والصلاحيات</h4>
+    <p>تحديد صلاحيات الموظفين وتسجيل العمليات المهمة.</p>
+    <span class="go">فتح الإدارة ←</span>
+  </div>
+
+  <div class="card cyan" onclick="showToast('تم فتح النسخ الاحتياطي')">
+    <div class="bigicon">🔐</div>
+    <h4>الأمان والنسخ الاحتياطي</h4>
+    <p>إدارة الأمان والجلسات وسجل العمليات والنسخ الاحتياطية.</p>
+    <span class="go">فتح الأمان ←</span>
+  </div>
+
+</section>
+
+<section class="panel">
+  <h3>📡 حالة الشبكة الآن</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>الجهاز</th>
+          <th>العنوان</th>
+          <th>الحالة</th>
+          <th>آخر اتصال</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>الروتر الرئيسي</td>
+          <td>192.168.88.1</td>
+          <td><span class="badge ok">متصل</span></td>
+          <td>الآن</td>
+        </tr>
+        <tr>
+          <td>AP-01</td>
+          <td>192.168.88.10</td>
+          <td><span class="badge ok">متصل</span></td>
+          <td>منذ دقيقة</td>
+        </tr>
+        <tr>
+          <td>AP-02</td>
+          <td>192.168.88.11</td>
+          <td><span class="badge warn">ضغط مرتفع</span></td>
+          <td>منذ دقيقتين</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notice">
+    💡 هذه الواجهة جاهزة كلوحة تحكم. التحكم الحقيقي في أجهزة MikroTik
+    يحتاج Backend آمن يتصل بالروتر؛ لا تضع كلمات مرور الروترات أو مفاتيح API داخل GitHub أو داخل JavaScript العام.
+  </div>
+</section>
+
+<section class="panel">
+  <h3>🎫 الباقات السريعة</h3>
+  <div class="grid">
+
+    <div class="card green" style="min-height:135px">
+      <div class="bigicon">🎫</div>
+      <h4>أبو 50</h4>
+      <p>باقة قابلة للتخصيص</p>
+      <button class="btn green" style="margin-top:12px" onclick="showToast('تم اختيار أبو 50')">اختيار</button>
+    </div>
+
+    <div class="card cyan" style="min-height:135px">
+      <div class="bigicon">🎫</div>
+      <h4>أبو 100</h4>
+      <p>باقة قابلة للتخصيص</p>
+      <button class="btn cyan" style="margin-top:12px" onclick="showToast('تم اختيار أبو 100')">اختيار</button>
+    </div>
+
+    <div class="card purple" style="min-height:135px">
+      <div class="bigicon">🎫</div>
+      <h4>أبو 200</h4>
+      <p>باقة قابلة للتخصيص</p>
+      <button class="btn primary" style="margin-top:12px" onclick="showToast('تم اختيار أبو 200')">اختيار</button>
+    </div>
+
+    <div class="card orange" style="min-height:135px">
+      <div class="bigicon">🎫</div>
+      <h4>أبو 500</h4>
+      <p>باقة قابلة للتخصيص</p>
+      <button class="btn" style="margin-top:12px" onclick="showToast('تم اختيار أبو 500')">اختيار</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="panel">
+  <h3>💬 مركز الدعم</h3>
+  <p style="color:#9ca8c7;font-size:13px;line-height:1.8">
+    تحتاج مساعدة؟ تواصل مع المهندس عبدالله عبر واتساب.
+  </p>
+  <div class="actions">
+    <a class="btn green" href="https://wa.me/967780030066" target="_blank">
+      💬 واتساب — 780030066
+    </a>
+    <button class="btn primary" onclick="showToast('المساعد الذكي قيد التجهيز')">
+      🤖 مساعد الشبكة
+    </button>
+  </div>
+</section>
+
+<footer>
+  SHABAKATY PLUS PRO © 2026 — شبكتك، أرباحك، بين يديك.
+</footer>
+
+</main>
+
+<!-- Router Modal -->
+<div class="modal" id="routerModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>🌐 إضافة روتر جديد</h3>
+      <button class="close" onclick="closeModal('routerModal')">×</button>
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+        <label>اسم الشبكة</label>
+        <input id="networkName" placeholder="مثال: شبكة النور">
+      </div>
+
+      <div class="field">
+        <label>اسم الروتر</label>
+        <input id="routerName" placeholder="مثال: MikroTik الرئيسي">
+      </div>
+
+      <div class="field">
+        <label>IP / Host</label>
+        <input id="routerHost" placeholder="192.168.88.1">
+      </div>
+
+      <div class="field">
+        <label>اسم المستخدم</label>
+        <input id="routerUser" placeholder="admin">
+      </div>
+
+      <div class="field">
+        <label>كلمة السر</label>
+        <input id="routerPass" type="password" placeholder="••••••••">
+      </div>
+
+      <div class="full actions">
+        <button class="btn primary" onclick="saveRouter()">💾 حفظ الروتر</button>
+        <button class="btn" onclick="closeModal('routerModal')">إلغاء</button>
+      </div>
+
+    </div>
+
+    <div class="notice">
+      🔐 بيانات الدخول يجب إرسالها إلى Backend آمن عند ربط النظام الحقيقي.
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function openModal(id){
+  document.getElementById(id).classList.add('show');
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove('show');
+}
+
+function showToast(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;
+  toast.classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>{
+    toast.classList.remove('show');
+  },2500);
+}
+
+function saveRouter(){
+  const network=document.getElementById('networkName').value.trim();
+  const router=document.getElementById('routerName').value.trim();
+  const host=document.getElementById('routerHost').value.trim();
+  const user=document.getElementById('routerUser').value.trim();
+  const pass=document.getElementById('routerPass').value;
+
+  if(!network || !router || !host || !user || !pass){
+    showToast('⚠️ أكمل جميع بيانات الروتر');
+    return;
+  }
+
+  localStorage.setItem('shabakaty_router_demo',JSON.stringify({
+    network,router,host,user,
+    savedAt:new Date().toISOString()
+  }));
+
+  closeModal('routerModal');
+  showToast('✅ تم حفظ بيانات الروتر في هذه الواجهة');
+}
+
+window.addEventListener('click',function(e){
+  document.querySelectorAll('.modal').forEach(m=>{
+    if(e.target===m)m.classList.remove('show');
+  });
+});
+</script>
+
+</body>
+</html>
